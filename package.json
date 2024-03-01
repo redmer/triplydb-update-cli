@@ -1,0 +1,80 @@
+{
+  "name": "@rdmr-eu/triplydb-update-cli",
+  "version": "1.0.0",
+  "description": "CLI to interface with TriplyDB API",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redmer/triplydb-update-cli.git"
+  },
+  "author": "Redmer Kronemeijer",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/redmer/triplydb-update-cli/issues"
+  },
+  "homepage": "https://github.com/redmer/triplydb-update-cli#readme",
+  "bin": {
+    "triplydb-update": "dist/cli.js"
+  },
+  "scripts": {
+    "start": "triplydb import-from-file --help",
+    "build": "tsc -p ./tsconfig.json",
+    "watch": "tsc --watch -p ./tsconfig.json",
+    "lint": "cross-env ESLINT_STRICT=true ESLINT_EXPENSIVE=true eslint . --ext .ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run lint",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "types": "dist",
+  "type": "module",
+  "prettier": {
+    "printWidth": 100
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/ban-ts-comment": 0,
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/yargs": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@triply/triplydb": "^7.0.2",
+    "dotenv": "^16.4.5",
+    "yargs": "^17.7.2"
+  }
+}
