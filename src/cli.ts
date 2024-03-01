@@ -43,9 +43,13 @@ async function cli() {
         const proxy = new AppProxy(argv.token);
         let dataset: Dataset;
         const [account, datasetName] = await proxy.qualifiedName(argv.DATASET);
-        if (argv.create)
-          dataset = await account.ensureDataset(datasetName, { accessLevel: "private" });
-        else dataset = await account.getDataset(datasetName);
+        try {
+          dataset = await account.getDataset(datasetName);
+        } catch (err) {
+          if (argv.create)
+            dataset = await account.addDataset(datasetName, { accessLevel: "private" });
+          else throw err;
+        }
 
         console.info(`Uploading...`);
         await dataset.importFromFiles(argv.FILES, {
