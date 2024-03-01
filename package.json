@@ -17,6 +17,7 @@
     "triplydb-update": "dist/cli.js"
   },
   "scripts": {
+    "test": "",
     "start": "triplydb import-from-file --help",
     "build": "tsc -p ./tsconfig.json",
     "watch": "tsc --watch -p ./tsconfig.json",
