@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import type Dataset from "@triply/triplydb/Dataset.js";
 import * as dotenv from "dotenv";
 import fs from "node:fs/promises";
