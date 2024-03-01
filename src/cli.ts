@@ -31,6 +31,11 @@ async function cli() {
             choices: ["overwrite", "rename", "merge"],
             default: "rename",
             desc: "Resolve when graph name already exists",
+          })
+          .option("update-services", {
+            type: "boolean",
+            desc: "Update dependent services",
+            default: true,
           }),
       async (argv) => {
         const proxy = new AppProxy(argv.token);
@@ -47,9 +52,17 @@ async function cli() {
           overwriteAll: argv.mode === "overwrite",
           mergeGraphs: argv.mode === "merge",
         });
+
         const appInfo = await proxy.triplyApp.getInfo();
         const info = await dataset.getInfo();
         console.info(`Upload DONE: <${appInfo.consoleUrl}/${info.owner.accountName}/${info.name}>`);
+
+        if (argv.updateServices)
+          for await (const service of dataset.getServices()) {
+            const serviceInfo = await service.getInfo();
+            if (!(await service.isUpToDate())) await service.update();
+            console.log(`Service UPDATED: ${serviceInfo.name}`);
+          }
       },
     )
     .command(
