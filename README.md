@@ -1,2 +1,3 @@
-# triply-api-cli
+# triplydb-update-cli
+
 CLI to interface with Triply API
