@@ -9,7 +9,7 @@ dotenv.config();
 
 async function cli() {
   await yargs(hideBin(process.argv))
-    .scriptName("triplydb")
+    .scriptName("triplydb-update")
     .option("token", {
       alias: "t",
       desc: `TriplyDB token (default: $${TRIPLYDB_TOKEN})`,
@@ -95,9 +95,5 @@ async function cli() {
     .usage("Interact with the TriplyDB API")
     .parse();
 }
-
-`
-triply redmer/kg 
-`;
 
 void cli();
