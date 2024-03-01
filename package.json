@@ -1,6 +1,6 @@
 {
   "name": "@rdmr-eu/triplydb-update-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI to interface with TriplyDB API",
   "main": "dist/index.js",
   "repository": {
